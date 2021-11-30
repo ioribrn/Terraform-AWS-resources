@@ -1,4 +1,5 @@
 resource "aws_vpc" "prod-vpc" {
+
   cidr_block = "10.0.0.0/16"
   enable_dns_support = "true"
   enable_dns_hostnames = "true"
@@ -7,6 +8,7 @@ resource "aws_vpc" "prod-vpc" {
   tags = {
       Name = "prod-vpc"
   }
+
 }
 
 resource "aws_subnet" "prod-subnet-public" {
@@ -18,6 +20,7 @@ resource "aws_subnet" "prod-subnet-public" {
     tags = {
         Name = "prod-subnet-public"
     }
+
 }
 
 resource "aws_subnet" "prod-subnet-private" {
@@ -29,4 +32,5 @@ resource "aws_subnet" "prod-subnet-private" {
     tags = {
         Name = "prod-subnet-private"
     }
+    
 }
