@@ -4,7 +4,8 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
-
+*.pub
+fiverr
 # Crash log files
 crash.log
 var.tf
