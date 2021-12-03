@@ -10,8 +10,10 @@ resource "aws_autoscaling_group" "foobar" {
   name                      = "foobar"
   max_size                  = 3
   min_size                  = 1
+  #link elb with autoscaling group
   health_check_grace_period = 300
-  health_check_type         = "EC2"
+  health_check_type         = "ELB"
+  load_balancers = [aws_elb.web_elb.name]
 #   desired_capacity          = 1
   force_delete              = true
 #   placement_group           = aws_placement_group.test.id
