@@ -13,14 +13,14 @@ variable "num_instances" {
 variable "access_key"{
  
    type = string
-   default = "<access_key>"
+   default = "AKIAW7IPABMDWPTS7QQL"
  
 }
 
 variable "secret_key"{
  
    type = string
-   default = "<secret_key>"
+   default = "JYDK3mOk+I2j4v35sZ6gNn/3yTSnwU5EQfByZyjj"
  
 }
 
@@ -56,4 +56,8 @@ variable "AWS_REGION" {
 variable "domain_name" {
 
     default = "secdevops.fr"
+}
+
+variable "db_instance" {
+  default = "db.t2.micro"
 }

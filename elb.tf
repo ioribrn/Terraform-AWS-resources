@@ -12,7 +12,7 @@ resource "aws_elb" "web_elb" {
   ## remove instance after 400 s of deletion 
   connection_draining =  true
   connection_draining_timeout = 400
-  instances = [aws_instance.web1.id]
+  #instances = [aws_instance.web1.name]
 health_check {
     healthy_threshold = 2
     unhealthy_threshold = 2

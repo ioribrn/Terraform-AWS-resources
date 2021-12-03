@@ -45,3 +45,15 @@ resource "aws_subnet" "prod-subnet-private" {
     }
 
 }
+resource "aws_subnet" "prod-subnet-private-2" {
+
+    vpc_id = aws_vpc.prod-vpc.id
+    cidr_block ="10.0.5.0/24"
+    map_public_ip_on_launch = "false"
+    availability_zone =  "us-east-1d"
+    tags = {
+        Name = "prod-subnet-private-2"
+    }
+
+}
+
