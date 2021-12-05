@@ -1,17 +1,26 @@
 resource "aws_launch_configuration" "as_conf" {
   name      = "web_config"
   image_id  = lookup(var.AMI,var.AWS_REGION)
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
   key_name = "${aws_key_pair.region-key-pair.id}"
   security_groups = [aws_security_group.security-allowed.id]
-  user_data = "#!/bin/bash\napt-get update\napt-get -y install wget php php-mysql php-curl php-gd php-mbstring php-xml php-xmlrpc unzip net-tools nginx\ncd /var/www\nsudo wget https://wordpress.org/latest.zip\nsudo unzip latest.zip\nsudo rm -rif html\nsudo mkdir html\nsudo mv ./wordpress/* html\ncd html\ncd /var/www/html\ncp wp-config-sample.php wp-config.php\nsudo sed -e \"s/database_name_here/myrdstestmysql/\" wp-config.php"
+  user_data = data.template_file.init.rendered
+  #user_data = "#!/bin/bash\napt-get update\napt-get -y install wget php php-mysql php-curl php-gd php-mbstring php-xml php-xmlrpc unzip net-tools nginx\ncd /var/www\nsudo wget https://wordpress.org/latest.zip\nsudo unzip latest.zip\nsudo rm -rif html\nsudo mkdir html\nsudo mv ./wordpress/* html\ncd html\ncd /var/www/html\ncp wp-config-sample.php wp-config.php\nsudo sed -ie \"s/database_name_here/myrdstestmysql/g\" wp-config.php\nsudo sed -ie \"s/username_here/admin/g\" wp-config.php\nsudo sed -ie \"s/password_here/admin123/g\" wp-config.php\nsudo sed -ie \"s/localhost/admin123/g\" wp-config.php"
 
 }
 
+
+data "template_file" "init" {
+  template = "${file("router-init.sh.tpl")}"
+
+vars = {
+    rds_localhost = "${aws_db_instance.my_test_mysql.endpoint}"
+  }
+}
 resource "aws_autoscaling_group" "foobar" {
   name                      = "foobar"
   max_size                  = 4
-  min_size                  = 2
+  min_size                  = 1
   #link elb with autoscaling group
   health_check_grace_period = 300
   health_check_type         = "ELB"
