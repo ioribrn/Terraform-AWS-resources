@@ -31,3 +31,20 @@ tags = {
     Name = "my-elb"
 }
 }
+
+
+##route 53
+resource "aws_route53_zone" "primary" {
+  name = "secdevops.fr"
+}
+resource "aws_route53_record" "www" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = "secdevops.fr"
+  type    = "A"
+
+  alias {
+    name                   = aws_elb.web_elb.dns_name
+    zone_id                = aws_elb.web_elb.zone_id
+    evaluate_target_health = true
+  }
+}

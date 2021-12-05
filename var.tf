@@ -61,3 +61,21 @@ variable "domain_name" {
 variable "db_instance" {
   default = "db.t2.micro"
 }
+
+
+####wp and rds
+
+variable "database_name" {
+
+    default = "myrdstestmysql"
+}
+variable "database_password" {
+
+        default = "admin123"
+
+}
+variable "database_user" {
+
+        default = "admin"
+
+}

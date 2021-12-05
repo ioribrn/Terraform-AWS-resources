@@ -4,7 +4,9 @@ resource "aws_launch_configuration" "as_conf" {
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.region-key-pair.id}"
   security_groups = [aws_security_group.security-allowed.id]
-  user_data = "#!/bin/bash\napt-get update\napt-get -y install net-tools nginx\nMYIP=`ifconfig | grep -E '(inet 10)|(addr:10)' | awk '{ print $2 }' | cut -d ':' -f2`\necho 'this is: '$MYIP > /var/www/html/index.html"
+  user_data = "#!/bin/bash\napt-get update\napt-get -y install wget php php-mysql php-curl php-gd php-mbstring php-xml php-xmlrpc unzip net-tools nginx\ncd /var/www\nsudo wget https://wordpress.org/latest.zip\nsudo unzip latest.zip\nsudo rm -rif html\nsudo mkdir html\nsudo mv ./wordpress/* html"
+  #user_data ="#!/bin/bash\napt-get update\nsudo yum install http -y\nsudo yum install php -y\nsudo systemctl start httpd\nsudo systemctl start php\ncd /var/www/html\nsudo wget https://wordpress.org/latest.zip\nsudo unzip latest.zip"
+#    user_data ="#!/bin/bash\napt-get update\nmkdir /tmp/test"
 }
 
 resource "aws_autoscaling_group" "foobar" {
