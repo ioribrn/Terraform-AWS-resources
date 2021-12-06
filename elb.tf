@@ -13,6 +13,17 @@ resource "aws_elb" "web_elb" {
   connection_draining =  true
   connection_draining_timeout = 1000
   #instances = [aws_instance.web1.name]
+
+
+  #create ssl certification before
+
+  listener {
+    instance_port      = 8000
+    instance_protocol  = "http"
+    lb_port            = 443
+    lb_protocol        = "https"
+    ssl_certificate_id = var.certificate
+  }
 health_check {
     healthy_threshold = 2
     unhealthy_threshold = 2

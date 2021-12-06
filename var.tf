@@ -17,6 +17,11 @@ variable "access_key"{
  
 }
 
+
+variable "certification" {
+
+  default = "arn:aws:acm:us-east-1:479457184519:certificate/be063158-d15c-4906-96b3-cb64044df654"
+}
 variable "secret_key"{
  
    type = string
