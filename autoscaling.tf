@@ -21,7 +21,7 @@ vars = {
 resource "aws_autoscaling_group" "foobar" {
   name                      = "foobar"
   max_size                  = 4
-  min_size                  = 3
+  min_size                  = 1
   #link elb with autoscaling group
   health_check_grace_period = 1000
   health_check_type         = "ELB"
@@ -30,7 +30,7 @@ resource "aws_autoscaling_group" "foobar" {
   force_delete              = false
 #   placement_group           = aws_placement_group.test.id
   launch_configuration      = aws_launch_configuration.as_conf.name
-  vpc_zone_identifier       = [aws_subnet.prod-subnet-public.id,aws_subnet.prod-subnet-public-2.id]
+  vpc_zone_identifier       = [aws_subnet.prod-subnet-public.id,aws_subnet.prod-subnet-public2.id]
 
   tag {
     key                 = "Name"

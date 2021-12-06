@@ -29,3 +29,7 @@ resource "aws_route_table_association" "pvsubnet" {
   subnet_id      = aws_subnet.prod-subnet-public.id
   route_table_id = aws_route_table.routegw.id
 }
+resource "aws_route_table_association" "pvsubnet-2" {
+  subnet_id      = aws_subnet.prod-subnet-public2.id
+  route_table_id = aws_route_table.routegw.id
+}

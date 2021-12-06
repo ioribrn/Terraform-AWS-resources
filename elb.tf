@@ -5,7 +5,7 @@ resource "aws_elb" "web_elb" {
   ]
   subnets = [
     "${aws_subnet.prod-subnet-public.id}",
-    "${aws_subnet.prod-subnet-public-2.id}"
+    "${aws_subnet.prod-subnet-public2.id}"
   ]
   cross_zone_load_balancing   = true
 
