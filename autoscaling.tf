@@ -1,6 +1,7 @@
 resource "aws_launch_configuration" "as_conf" {
   name      = "web_config"
   image_id  = lookup(var.AMI,var.AWS_REGION)
+  depends_on = [aws_efs_mount_target.efs-mt-example]
   instance_type = var.instance_type
   key_name = "${aws_key_pair.region-key-pair.id}"
   security_groups = [aws_security_group.security-allowed.id]
@@ -20,13 +21,13 @@ vars = {
 resource "aws_autoscaling_group" "foobar" {
   name                      = "foobar"
   max_size                  = 4
-  min_size                  = 1
+  min_size                  = 3
   #link elb with autoscaling group
-  health_check_grace_period = 300
+  health_check_grace_period = 1000
   health_check_type         = "ELB"
   load_balancers = [aws_elb.web_elb.name]
 #   desired_capacity          = 1
-  force_delete              = true
+  force_delete              = false
 #   placement_group           = aws_placement_group.test.id
   launch_configuration      = aws_launch_configuration.as_conf.name
   vpc_zone_identifier       = [aws_subnet.prod-subnet-public.id,aws_subnet.prod-subnet-public-2.id]
