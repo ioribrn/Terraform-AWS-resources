@@ -17,13 +17,13 @@ resource "aws_elb" "web_elb" {
 
   #create ssl certification before
 
-  listener {
-    instance_port      = 8000
-    instance_protocol  = "http"
-    lb_port            = 443
-    lb_protocol        = "https"
-    ssl_certificate_id = var.certificate
-  }
+  # listener {
+  #   instance_port      = 8000
+  #   instance_protocol  = "http"
+  #   lb_port            = 443
+  #   lb_protocol        = "https"
+  #   ssl_certificate_id = var.certificate
+  # }
 health_check {
     healthy_threshold = 2
     unhealthy_threshold = 2

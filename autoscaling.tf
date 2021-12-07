@@ -21,7 +21,7 @@ vars = {
 resource "aws_autoscaling_group" "foobar" {
   name                      = "foobar"
   max_size                  = 4
-  min_size                  = 1
+  min_size                  = 2
   #link elb with autoscaling group
   health_check_grace_period = 1000
   health_check_type         = "ELB"
