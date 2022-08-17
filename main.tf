@@ -28,7 +28,6 @@
 #         private_key = "${file("${var.PRIVATE_KEY_PATH}")}"
 #     }
 # }
-// Sends your public key to the instance
 resource "aws_key_pair" "region-key-pair" {
   key_name   = "region-key-pair"
   public_key = file(var.PUBLIC_KEY_PATH)
